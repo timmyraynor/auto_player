@@ -1,11 +1,23 @@
 import cv2, numpy,time, os, random, threading
 import pyautogui
-from winsound import Beep
-from PIL import ImageGrab
+import pyscreenshot as ImageGrab
 from settings import *
+
 
 #桌面模式下的鼠标操作延迟，程序已经设置随机延迟这里无需设置修改
 pyautogui.PAUSE = 0.01
+
+
+try:
+    import winsound
+except ImportError:
+    import os
+    def Beep(frequency,duration):
+        #apt-get install beep
+        os.system('say "beep"')
+else:
+    def Beep(frequency,duration):
+        winsound.Beep(frequency,duration)
 
 
 #adb模式下设置连接测试
@@ -51,11 +63,25 @@ def screen_shot():
             time.sleep(0.1)
             os.system(row)
     else:  #桌面截屏
-        screen = ImageGrab.grab()
-        screen.save('./screen/screen.jpg')        
-    print('截图已完成 ', time.ctime())
-    screen = cv2.imread('./screen/screen.jpg')
+        # image = ImageGrab.grab()
+        # if screen.mode in ("RGBA", "P"):
+        #     screen = screen.convert("RGB")
+        # screen.save('./screen/screen.jpg')        
+    # print('截图已完成 ', time.ctime())
+    # screen = cv2.imread('./screen/screen.jpg')
+        image = pyautogui.screenshot()
+        screen = cv2.cvtColor(numpy.array(image), cv2.COLOR_RGB2BGR)
+        
     return screen
+
+def moveToOnly(pos):
+    x, y = pos
+    if mode == 0:  #adb点击
+        a = "adb shell input touchscreen tap {0} {1}" .format(x, y)
+        os.system(a)
+    else:   #桌面鼠标点击
+        pyautogui.moveTo(x, y)
+
 
 # ADB命令模拟点击屏幕，参数pos为目标坐标(x, y)
 def touch(pos):
@@ -110,7 +136,7 @@ def locate(screen, wanted, show=0):
 
         cv2.circle(screen, (x, y), 10, (0, 0, 255), 3)
             
-        x,y = int(x), int(y)
+        x,y = int(x)/2, int(y)/2
         loc_pos.append([x, y])
 
     if show:  #在图上显示寻找的结果，调试时开启
@@ -179,6 +205,28 @@ def find_touch_any(target_list, tap=True):
             if tap:      
                 touch(xx)
                 random_delay()
+            re = target
+            break
+        else:
+            print('N 未找到目标', target)
+    return re
+
+
+def find_move_any(target_list, tap=True):
+    screen = screen_shot()
+    print('目标列表 ', target_list)
+    re = None
+    for target in target_list:
+        wanted = imgs[target]
+        size = wanted[0].shape
+        h, w , ___ = size
+        pts = locate(screen, wanted)
+        if pts:
+            print('Y 已找到目标 ', target, '位置 ', pts[0])
+            xx = pts[0]
+            if tap:      
+                moveToOnly(xx)
+                time.sleep(10)
             re = target
             break
         else:

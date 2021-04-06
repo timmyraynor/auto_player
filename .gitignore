@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Ignore Python VirtualEnv
+player/
+player/*
+
 # C extensions
 *.so
 
