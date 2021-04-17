@@ -111,7 +111,7 @@ def load_imgs():
     for file in file_list:
         name = file.split('.')[0]
         file_path = path + '/' + file
-        a = [ cv2.imread(file_path) , treshold, name]
+        a = [ cv2.imread(file_path) , treshold, name ]
         imgs[name] = a
 
     return imgs
@@ -156,7 +156,8 @@ def cut(screen, upleft, downright):
 #随机偏移坐标，防止游戏的外挂检测。p是原坐标(x, y)，w、n是目标图像宽高，返回目标范围内的一个随机坐标
 def random_offset(p, w=40, h=20):
     a,b = p
-    w, h = int(w/3), int(h/3)
+    # w, h = int(w/3), int(h/3)
+    w, h = int(w/5), int(h/5)
     c,d = random.randint(-w, w),random.randint(-h, h)
     e,f = a + c, b + d
     y = [e, f]

@@ -1,5 +1,6 @@
 import time, os
 import auto_player as player
+import random
 
 def get_pictures():   
     player.screen_shot()
@@ -53,12 +54,70 @@ def auto_play_explore(round=10):
                 print('托管中...')
                 time.sleep(5)
 
+
+def _random_sleep(wmin=5,wmax=15):
+    sleep_time = random.randint(wmin, wmax)
+    print("sleep %d s", sleep_time)
+    time.sleep(sleep_time)
+
+
+def auto_play_fy(round=200):
+    count = 0
+    is_waiting = False
+    while count < round:       
+        ar1 = ['fy_matching',  'fy_ready','fy_next', 'fy_open_box', 'fy_queue','fy_start']
+        re = player.find_touch_any(ar1)
+        if re == 'fy_start':
+            print('开始新一轮...')
+            count += 1
+            _random_sleep(wmin=1,wmax=3)
+        elif re == 'fy_matching':
+            print('开始匹配...')
+            _random_sleep(wmin=4,wmax=7)
+        elif re == 'fy_queue':
+            print('排队中...')
+            ar2 = ['fy_matching',  'fy_ready','fy_next', 'fy_open_box', 'fy_queue']
+            while(True):
+                re2 = player.find_touch_any(ar2, False)
+                if re2 == 'fy_queue':
+                    print('继续等待...')
+                    _random_sleep(wmin=2,wmax=5)
+                elif re2 == 'fy_ready' or re2=='fy_matching' or re2=='fy_next' or re2=='fy_open_box':
+                    print('准备战斗...')
+                    break
+        elif re == 'fy_ready':
+            print('开始匹配...')
+            ar2 = ['fy_ready',]
+            re = player.find_touch_any(ar2, False)
+            if re == 'fy_ready':
+                print('开始战斗...')
+                _random_sleep(wmax=4,wmin=1)
+        elif re == 'fy_next':
+            print('点击继续...')
+            ar2 = ['fy_next',]
+            re = player.find_touch_any(ar2, False)
+            if re == 'fy_next':
+                print('点击继续...')
+                _random_sleep(wmax=2,wmin=1)
+        elif re == 'fy_open_box':
+            print('开箱继续...')
+            ar2 = ['fy_open_box',]
+            re = player.find_touch_any(ar2, False)
+            if re == 'fy_open_box':
+                print('开箱继续...')
+                _random_sleep(wmax=2,wmin=1)
+        elif re is None:
+            print('不知所措...')
+            _random_sleep(wmax=5,wmin=1)
+        # print('已经刷了' + str(count) + '次。。。')
+
 def menu(debug=False):
 
     menu_list = [
     [get_pictures, '获取当前屏幕截图'],
     [auto_play_yuhun, '自动刷图_御魂'],
-    [auto_play_explore, '自动刷图_探险']
+    [auto_play_explore, '自动刷图_探险'],
+    [auto_play_fy, '自动刷碎片']
     ]
 
     start_time = time.time()
