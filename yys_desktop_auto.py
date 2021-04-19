@@ -61,7 +61,7 @@ def _random_sleep(wmin=5,wmax=15):
     time.sleep(sleep_time)
 
 
-def auto_play_fy(round=200):
+def auto_play_fy(round=100):
     count = 0
     is_waiting = False
     while count < round:       
