@@ -13,8 +13,7 @@ try:
 except ImportError:
     import os
     def Beep(frequency,duration):
-        #apt-get install beep
-        os.system('say "beep"')
+        pass
 else:
     def Beep(frequency,duration):
         winsound.Beep(frequency,duration)
