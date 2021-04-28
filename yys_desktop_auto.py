@@ -172,7 +172,7 @@ def menu(debug=False):
     [auto_play_fy, '自动刷碎片'],
     [auto_play_jj, '自动结界突破'],
     [daily_job, '自动日常'],
-    [_parties_update, '测试']
+    [_friend_update, '测试']
     ]
 
     start_time = time.time()
