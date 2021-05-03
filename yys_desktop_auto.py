@@ -3,6 +3,7 @@ import auto_player as player
 import random
 from modules.friend import _friend_update
 from modules.parties import _parties_update
+from modules.enchantment import auto_play_enchantment
 
 def get_pictures():   
     player.screen_shot()
@@ -83,18 +84,10 @@ def daily_job():
     _friend_update()
     _parties_update()
     entry_jj()
-    auto_play_jj()
+    auto_play_enchantment()
     
 
-def entry_jj():
-    while True:
-        ar1 = ['explore_entry', 'tupo_entry', 'jj_tupo', 'jj_tupo_refresh']
-        re = player.find_touch_any(ar1)
-        _random_sleep(wmin=1,wmax=1)
-        if re == 'jj_tupo':
-            break
-        elif re == 'jj_tupo_refresh':
-            break
+
 
 
 def auto_play_fy(round=100):
@@ -147,37 +140,7 @@ def auto_play_fy(round=100):
             _random_sleep(wmax=5,wmin=1)
         print('已经刷了' + str(count) + '次。。。')
 
-def auto_play_jj(round=30):
-    count = 0
-    quit_count = 0
-    is_waiting = False
-    ar1 = [ 'jj_attack', 'fy_ready', 'jj_fail_continue','jj_success_continue', 'jj_tupo','jj_tupo_refresh']
-    while count < round:       
-        re = player.find_touch_any(ar1)
-        if re == 'jj_tupo':
-            print('突破中...')
-            _random_sleep(wmin=1,wmax=2)
-        elif re == 'jj_tupo_refresh':
-            print('刷新...')
-            _random_sleep(wmax=2,wmin=1)
-        elif re == 'jj_attack':
-            print('开始突破...')
-            _random_sleep(wmax=2,wmin=1)
-        elif re == 'fy_ready':
-            print('准备战斗...')
-            _random_sleep(wmax=2,wmin=1)
-        elif re == 'jj_success_continue':
-            print('(成功)结束清算...')
-            count += 1
-            _random_sleep(wmax=1,wmin=1)
-        elif re == 'jj_fail_continue':
-            print('(失败)结束清算...')
-            _random_sleep(wmax=1,wmin=1)
-        elif re is None:
-            print('不知所措...')
-            _random_sleep(wmax=2,wmin=1)
-        _random_sleep(wmax=2,wmin=1)
-        print('已经刷了' + str(count) + '次。。。')
+    
 
 def menu(debug=False):
 
@@ -186,7 +149,7 @@ def menu(debug=False):
     [auto_play_yuhun, '自动刷图_御魂'],
     [auto_play_explore, '自动刷图_探险'],
     [auto_play_fy, '自动刷碎片'],
-    [auto_play_jj, '自动结界突破'],
+    [auto_play_enchantment, '自动结界突破'],
     [daily_job, '自动日常'],
     [auto_play_tower, '测试']
     ]

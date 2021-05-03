@@ -21,28 +21,30 @@ def _random_sleep(wmin=5,wmax=15):
 #             ....
 #           ]
 #        limits: how many times we should loop this through
-#                default is 3
-def perform_touch_loop(seq=[], limits=3):
+#                default is 3 [optional]
+#        nonehandler:  handler when nothing matched [optional]
+def perform_touch_loop(seq=[], limits=3, none_handler=None):
     sorted_seq = sorted(seq, key= lambda i: i['seq'])
     constructed_touch_seq = [x['name'] for x in sorted_seq]
-
     # control limits, if < 0 then we take it as loop forever
     if limits < 0:
       while True:
-        should_break = _act_with_clicks(constructed_touch_seq, sorted_seq, counter)
+        should_break = _act_with_clicks(constructed_touch_seq, sorted_seq, counter, none_handler)
         if should_break:
           break
     else:
       counter = {'value': 0}
       while counter['value'] < limits:
-        should_break = _act_with_clicks(constructed_touch_seq, sorted_seq, counter)
+        should_break = _act_with_clicks(constructed_touch_seq, sorted_seq, counter, none_handler)
         if should_break:
           break
 
-def _act_with_clicks(constructed_touch_seq, sorted_seq, counter):
+def _act_with_clicks(constructed_touch_seq, sorted_seq, counter, none_handler):
       re = player.find_touch_any(constructed_touch_seq)
+      matched = False
       for n in sorted_seq:
         if re == n['name']:
+          matched = True
           # start processing if there's a click on item
           sleep_factor = n.get('sleep')
           if sleep_factor is None:
@@ -59,4 +61,8 @@ def _act_with_clicks(constructed_touch_seq, sorted_seq, counter):
           _random_sleep(wmin=1, wmax=sleep_factor)
           if n.get('break'):
             return True
+      
+      if not matched:
+          if none_handler:
+            none_handler()
       return False
