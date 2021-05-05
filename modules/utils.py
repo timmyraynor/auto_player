@@ -16,7 +16,8 @@ def _random_sleep(wmin=5,wmax=15):
 #              'response': print out message on this action
 #              'tick': whether to tick the counter on action
 #              'break': whether break the loop on this condition
-#              'sleep': sleep interval
+#              'sleep': sleep interval，
+#              'sleep_factor':  actual sleep time = sleep interval / factor
 #             },
 #             ....
 #           ]
@@ -46,9 +47,10 @@ def _act_with_clicks(constructed_touch_seq, sorted_seq, counter, none_handler):
         if re == n['name']:
           matched = True
           # start processing if there's a click on item
-          sleep_factor = n.get('sleep')
-          if sleep_factor is None:
-            sleep_factor = 2
+          sleep_time_input = n.get('sleep')
+          sleep_factor = n.get('sleep_factor', 1)
+          if sleep_time_input is None:
+            sleep_time_input = 2
           # processing actions
           if n.get('action') is None:
             print(n['response'])
@@ -58,7 +60,8 @@ def _act_with_clicks(constructed_touch_seq, sorted_seq, counter, none_handler):
           if n.get('tick'):
             counter['value'] += 1
           # sleep base on sleep factor
-          _random_sleep(wmin=1, wmax=sleep_factor)
+          min_sleep_time = 1/sleep_factor
+          _random_sleep(wmin=min_sleep_time, wmax=sleep_time_input/sleep_factor)
           if n.get('break'):
             return True
       
