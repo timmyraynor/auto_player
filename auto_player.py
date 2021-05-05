@@ -2,6 +2,8 @@ import cv2, numpy,time, os, random, threading
 import pyautogui
 import pyscreenshot as ImageGrab
 from settings import *
+from multiprocessing import Pool
+from functools import partial
 
 
 #桌面模式下的鼠标操作延迟，程序已经设置随机延迟这里无需设置修改
@@ -18,6 +20,7 @@ else:
     def Beep(frequency,duration):
         winsound.Beep(frequency,duration)
 
+current_img = None
 
 #adb模式下设置连接测试
 def adb_test():
@@ -191,26 +194,41 @@ def find_touch(target, tap=True):
 #寻找并点击,找到返回目标名，未找到返回NONE
 def find_touch_any(target_list, tap=True):
     screen = screen_shot()
+    find_match_points = partial(find_single, screen)
     print('目标列表 ', target_list)
     re = None
-    for target in target_list:
-        wanted = imgs[target]
-        size = wanted[0].shape
-        h, w , ___ = size
-        pts = locate(screen, wanted)
+    
+    with Pool(4) as p:
+        matched_points = p.map(find_match_points, target_list)
+    i = 0
+    while i < len(matched_points):
+        pts = matched_points[i]
+        re = target_list[i]
         if pts:
-            print('Y 已找到目标 ', target, '位置 ', pts[0])
-            xx = pts[0]
-            xx = random_offset(xx, w, h)
             if tap:      
-                touch(xx)
+                touch(pts)
                 random_delay()
-            re = target
             break
         else:
-            print('N 未找到目标', target)
+            print('N 未找到目标', target_list[i])
+        i += 1
     return re
 
+
+def find_single(screen, target):
+    wanted = imgs[target]
+    size = wanted[0].shape
+    h, w , ___ = size
+    pts = locate(screen, wanted)
+    re = None
+    if pts:
+        print('Y 已找到目标 ', target, '位置 ', pts[0])
+        xx = pts[0]
+        xx = random_offset(xx, w, h)
+        return xx
+    else:
+        return None
+        print('N 未找到目标', target)
 
 def find_move_any(target_list, tap=True):
     screen = screen_shot()
