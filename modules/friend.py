@@ -8,44 +8,46 @@ def _friend_update():
     count = 0
     seqs = [
         { 'name': ['friend_receive'],
-        'seq': 1,
+        'id': 1,
         'sleep': 1,
         'response': '接受友情点...'
         },
         { 'name': ['friend_receive2'],
-        'seq': 2,
+        'id': 2,
         'actions': None,
         'sleep': 1,
         'response': '接受要好友情点...'
         },
         { 'name': ['good_friend_send'],
-        'seq': 3,
+        'id': 3,
         'actions': None,
         'sleep': 1,
         'response': '发出好友友情点',
         'tick': True
         },
         { 'name': ['friend_send'],
-        'seq': 4,
+        'id': 4,
         'actions': None,
         'sleep': 1,
         'response': '发出友情点',
         'tick': True
         },
         { 'name': ['friend_switch'],
-        'seq': 5,
+        'id': 5,
         'actions': None,
         'sleep': 1,
-        'response': '切换友情界面'
+        'response': '切换友情界面',
+        'next': [1,2,3,4]
         },
         { 'name': ['friend_panel'],
-        'seq': 6,
+        'id': 6,
         'actions': None,
         'sleep': 1,
-        'response': '进入友情窗口'
+        'response': '进入友情窗口',
+        'next': [5]
         }
     ]
-    perform_touch_loop(seq=seqs, limits = 10)
+    perform_touch_loop(seq=seqs, limits = 10, full_seq=seqs)
     print('友情界面处理完毕，退出....')
     quick_close_cnt = 0
     while quick_close_cnt < 2:
