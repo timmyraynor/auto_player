@@ -26,7 +26,19 @@ def auto_play_enchantment(round=30):
         'sleep': 1,
         'response': '进攻选择....'
         },
+        { 'name': 'tupo_attack2',
+        'seq': 1,
+        'actions': None,
+        'sleep': 1,
+        'response': '进攻选择....'
+        },
         { 'name': 'fy_ready',
+        'seq': 2,
+        'actions': None,
+        'sleep': 1,
+        'response': '准备战斗...'
+        },
+        { 'name': 'jj_ready',
         'seq': 2,
         'actions': None,
         'sleep': 1,
@@ -45,6 +57,13 @@ def auto_play_enchantment(round=30):
         'tick': True,
         'response': '(成功)结束清算...'
         },
+        { 'name': 'jj_success_continue2',
+        'seq': 4,
+        'actions': None,
+        'sleep': 1,
+        'tick': True,
+        'response': '(成功)结束清算...'
+        },
         { 'name': 'jj_tupo',
         'seq': 5,
         'actions': None,
@@ -52,6 +71,12 @@ def auto_play_enchantment(round=30):
         'response': '突破中...'
         },
         { 'name': 'jj_tupo_refresh',
+        'seq': 7,
+        'actions': None,
+        'sleep': 1,
+        'response': '刷完界面更新...'
+        },
+        { 'name': 'jj_tupo_refresh2',
         'seq': 7,
         'actions': None,
         'sleep': 1,
