@@ -7,38 +7,38 @@ from modules.utils import perform_touch_loop, _random_sleep
 def _friend_update():
     count = 0
     seqs = [
-        { 'name': 'friend_receive',
+        { 'name': ['friend_receive'],
         'seq': 1,
         'sleep': 1,
         'response': '接受友情点...'
         },
-        { 'name': 'friend_receive2',
+        { 'name': ['friend_receive2'],
         'seq': 2,
         'actions': None,
         'sleep': 1,
         'response': '接受要好友情点...'
         },
-        { 'name': 'good_friend_send',
+        { 'name': ['good_friend_send'],
         'seq': 3,
         'actions': None,
         'sleep': 1,
         'response': '发出好友友情点',
         'tick': True
         },
-        { 'name': 'friend_send',
+        { 'name': ['friend_send'],
         'seq': 4,
         'actions': None,
         'sleep': 1,
         'response': '发出友情点',
         'tick': True
         },
-        { 'name': 'friend_switch',
+        { 'name': ['friend_switch'],
         'seq': 5,
         'actions': None,
         'sleep': 1,
         'response': '切换友情界面'
         },
-        { 'name': 'friend_panel',
+        { 'name': ['friend_panel'],
         'seq': 6,
         'actions': None,
         'sleep': 1,

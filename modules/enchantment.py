@@ -20,77 +20,59 @@ def auto_play_enchantment(round=30):
     count = 0
     quit_count = 0
     seqs = [
-        { 'name': 'jj_attack',
-        'seq': 1,
+        { 'name': ['jj_attack', 'tupo_attack2'],
+        'id': 1,
         'actions': None,
         'sleep': 1,
-        'response': '进攻选择....'
+        'response': '进攻选择....',
+        'next': [2]
         },
-        { 'name': 'tupo_attack2',
-        'seq': 1,
+        { 'name': ['fy_ready', 'jj_ready'],
+        'id': 2,
         'actions': None,
         'sleep': 1,
-        'response': '进攻选择....'
+        'response': '准备战斗...',
+        'next' : [3,4]
         },
-        { 'name': 'fy_ready',
-        'seq': 2,
+        { 'name': ['jj_fail_continue'],
+        'id': 3,
         'actions': None,
         'sleep': 1,
-        'response': '准备战斗...'
+        'response': '(失败)结束清算...',
+        'next': [5, 6]
         },
-        { 'name': 'jj_ready',
-        'seq': 2,
-        'actions': None,
-        'sleep': 1,
-        'response': '准备战斗...'
-        },
-        { 'name': 'jj_fail_continue',
-        'seq': 3,
-        'actions': None,
-        'sleep': 1,
-        'response': '(失败)结束清算...'
-        },
-        { 'name': 'jj_success_continue',
-        'seq': 4,
+        { 'name': ['jj_success_continue', 'jj_success_continue2'],
+        'id': 4,
         'actions': None,
         'sleep': 1,
         'tick': True,
-        'response': '(成功)结束清算...'
+        'response': '(成功)结束清算...',
+        'next': [5, 6]
         },
-        { 'name': 'jj_success_continue2',
-        'seq': 4,
+        { 'name': ['jj_tupo'],
+        'id': 5,
         'actions': None,
         'sleep': 1,
-        'tick': True,
-        'response': '(成功)结束清算...'
+        'response': '突破中...',
+        'next': [1]
         },
-        { 'name': 'jj_tupo',
-        'seq': 5,
+        { 'name': ['jj_tupo_refresh', 'jj_tupo_refresh2'],
+        'id': 6,
         'actions': None,
         'sleep': 1,
-        'response': '突破中...'
+        'response': '刷完界面更新...',
+        'next': [7]
         },
-        { 'name': 'jj_tupo_refresh',
-        'seq': 7,
+        { 'name': ['jj_tupo_confirm_refresh'],
+        'id': 7,
         'actions': None,
         'sleep': 1,
-        'response': '刷完界面更新...'
-        },
-        { 'name': 'jj_tupo_refresh2',
-        'seq': 7,
-        'actions': None,
-        'sleep': 1,
-        'response': '刷完界面更新...'
-        },
-        { 'name': 'jj_tupo_confirm_refresh',
-        'seq': 6,
-        'actions': None,
-        'sleep': 1,
-        'response': '刷新确认...'
+        'response': '刷新确认...',
+        'next': [5]
         }
     ]
 
-    perform_touch_loop(seq=seqs, limits = 30, none_handler=__none_handler)
+    perform_touch_loop(seq=seqs, limits = 30, none_handler=__none_handler,full_seq=seqs)
     print('友情界面处理完毕，退出....')
     quick_close_cnt = 0
     while quick_close_cnt < 2:
