@@ -33,7 +33,7 @@ def perform_touch_loop(seq=[], limits=3, counter={'value': 0}, none_handler=None
     constructed_touch_seq = [item for sublist in t for item in sublist]
     # control limits, if < 0 then we take it as loop forever
     NoneCounter = 0
-    NoneCounterThreshold = 10
+    NoneCounterThreshold = 5
     if limits < 0:
       while True:
         should_break, next_ops = _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, full_seq, action_pool)
@@ -98,7 +98,8 @@ def _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, 
           _random_sleep(wmin=min_sleep_time, wmax=sleep_time_input/sleep_factor)
           filtered_seq = []
           if n.get('next') and len(n.get('next')) > 0:
-            filtered_seq = [_get_item_from_list_base_on_id(full_seq, x) for x in n.get('next')]
+            next_list = sorted(n.get('next'))
+            filtered_seq = [_get_item_from_list_base_on_id(full_seq, x) for x in next_list]
           if n.get('break'):
             return True,filtered_seq
           return False, filtered_seq
