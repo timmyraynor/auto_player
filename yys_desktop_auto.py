@@ -4,6 +4,7 @@ import random
 from modules.friend import _friend_update
 from modules.parties import _parties_update
 from modules.enchantment import auto_play_enchantment
+from modules.dynamic import auto_play_dynamic
 
 def get_pictures():   
     player.screen_shot()
@@ -151,7 +152,9 @@ def menu(debug=False):
     [auto_play_fy, '自动刷碎片'],
     [auto_play_enchantment, '自动结界突破'],
     [daily_job, '自动日常'],
-    [auto_play_tower, '测试']
+    [auto_play_dynamic, '动态读取配置'],
+    # [auto_play_tower, '爬塔']，
+    [auto_play_dynamic, '测试']
     ]
 
     start_time = time.time()

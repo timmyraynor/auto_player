@@ -2386,6 +2386,11 @@
                 placeholder="screenshots names in comma seperate">
               <label>seqid:</label>
               <input type="text" df-db-seqid placeholder="seqid">
+              <lable>tick:</label>
+              <select df-db-tick>
+                <option value="true">True</option>
+                <option value="false">False</option>
+              </select>
               <label>sleep time:</label>
               <input type="text" df-db-sleep placeholder="sleep">
               <label>response:</label>
@@ -2399,6 +2404,7 @@
               "name": '',
               "seqid": nodeCounter,
               "response": '',
+              "tick": 'false',
               "sleep": 1
             }
           }, aws);
@@ -2425,6 +2431,7 @@
           outputObj['id'] = targetObject.seqid;
           outputObj['sleep'] = targetObject.sleep;
           outputObj['response'] = targetObject.response;
+          outputObj['tick'] = targetObject.tick == "true";
 
           outputObj['next'] = flow[k].outputs.output_1.connections.map(function(currentValue, index, arr){
             return flow[currentValue.node].data.db.seqid;

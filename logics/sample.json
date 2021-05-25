@@ -1,0 +1,45 @@
+[
+        { "name": ["jj_attack", "tupo_attack2"],
+        "id": 1,
+        "sleep": 1,
+        "response": "进攻选择....",
+        "next": [2]
+        },
+        { "name": ["fy_ready", "jj_ready"],
+        "id": 2,
+        "sleep": 1,
+        "response": "准备战斗...",
+        "next" : [3,4]
+        },
+        { "name": ["jj_fail_continue"],
+        "id": 3,
+        "sleep": 1,
+        "response": "(失败)结束清算...",
+        "next": [5, 6]
+        },
+        { "name": ["jj_success_continue", "jj_success_continue2"],
+        "id": 4,
+        "sleep": 1,
+        "tick": true,
+        "response": "(成功)结束清算...",
+        "next": [5, 6]
+        },
+        { "name": ["jj_tupo"],
+        "id": 5,
+        "sleep": 1,
+        "response": "突破中...",
+        "next": [1]
+        },
+        { "name": ["jj_tupo_refresh", "jj_tupo_refresh2"],
+        "id": 6,
+        "sleep": 1,
+        "response": "刷完界面更新...",
+        "next": [7]
+        },
+        { "name": ["jj_tupo_confirm_refresh"],
+        "id": 7,
+        "sleep": 1,
+        "response": "刷新确认...",
+        "next": [5]
+        }
+    ]
