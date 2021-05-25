@@ -2427,7 +2427,7 @@
         for (var k in flow) {
           var outputObj = {};
           var targetObject = flow[k].data.db;
-          outputObj['name'] = targetObject.name.split(',');
+          outputObj['name'] = targetObject.name.split(',').map(function(item){return item.trim();});
           outputObj['id'] = targetObject.seqid;
           outputObj['sleep'] = targetObject.sleep;
           outputObj['response'] = targetObject.response;
