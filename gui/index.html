@@ -2153,7 +2153,7 @@
 
 
   <header>
-    <h2>Drawflow</h2>
+    <h2>自动处理逻辑画板</h2>
     <div class="github-link"><a href="https://github.com/jerosoler/Drawflow" target="_blank"><svg
           class="svg-inline--fa fa-github fa-w-16 fa-3x" aria-hidden="true" focusable="false" data-prefix="fab"
           data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg="">
@@ -2175,7 +2175,20 @@
           </path>
         </svg><!-- <i class="fab fa-telegram-plane"></i> --><span> Node</span>
       </div>
+      <input type="file" name="inputfile" id="inputfile">
+      <br>
+      <script type="text/javascript">
+        document.getElementById('inputfile')
+          .addEventListener('change', function () {
 
+            var fr = new FileReader();
+            fr.onload = function () {
+              editor.import(JSON.parse(fr.result));
+            }
+
+            fr.readAsText(this.files[0]);
+          })
+      </script>
     </div>
     <div class="col-right">
       <div class="menu">
@@ -2190,6 +2203,7 @@
         null,4)+&#39;&lt;/code&gt;&lt;/pre&gt;&#39;
         })">Export</div>
         <div class="btn-clear" onclick="editor.clearModuleSelected()">Clear</div>
+
         <div class="btn-lock">
           <svg id="lock" class="svg-inline--fa fa-lock fa-w-14"
             onclick="editor.editor_mode=&#39;fixed&#39;; changeMode(&#39;lock&#39;);" aria-hidden="true"
