@@ -2202,7 +2202,7 @@
         html: &#39;&lt;pre&gt;&lt;code&gt;&#39;+JSON.stringify(transformExport(editor.export()),
         null,4)+&#39;&lt;/code&gt;&lt;/pre&gt;&#39;
         })">Export</div>
-        <div class="btn-clear" onclick="editor.clearModuleSelected()">Clear</div>
+        <div class="btn-clear" onclick="editor.clearModuleSelected(); nodeCounter=0;">Clear</div>
 
         <div class="btn-lock">
           <svg id="lock" class="svg-inline--fa fa-lock fa-w-14"
@@ -2256,6 +2256,7 @@
     const editor = new Drawflow(id);
     editor.reroute = true;
     editor.start();
+    var nodeCounter = 0;
 
 
 
@@ -2380,17 +2381,23 @@
           <div>
             <div class="title-box"><i class="fab fa-telegram-plane"></i> 操作节点 </div>
             <div class="box">
-              <input type="text" df-db-name placeholder="screenshots names in comma seperate">
+              <label>screenshots:</label>
+              <input type="text" df-db-name
+                placeholder="screenshots names in comma seperate">
+              <label>seqid:</label>
               <input type="text" df-db-seqid placeholder="seqid">
+              <label>sleep time:</label>
               <input type="text" df-db-sleep placeholder="sleep">
+              <label>response:</label>
               <input type="text" df-db-response placeholder="response">
             </div>
           </div>
           `;
+          nodeCounter += 1;
           editor.addNode('aws', 1, 1, pos_x, pos_y, 'aws', {
             "db": {
               "name": '',
-              "seqid": 1,
+              "seqid": nodeCounter,
               "response": '',
               "sleep": 1
             }
