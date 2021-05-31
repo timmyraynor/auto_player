@@ -10,6 +10,10 @@ __pycache__/
 player/
 player/*
 
+# Ignore vscode metadata
+.vscode/
+.vscode/*
+
 # C extensions
 *.so
 
