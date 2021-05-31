@@ -74,11 +74,13 @@ def _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, 
         t = [x['name'] for x in action_pool]
         target_list = [item for sublist in t for item in sublist]
         filtered_pool = action_pool
-      re = player.find_touch_any(target_list)
+      re = player.find_touch_any(target_list, tapTimes=2)
+      
       matched = False
       
       for n in filtered_pool:
         if re in n['name']:
+          print(n)
           matched = True
           # start processing if there's a click on item
           sleep_time_input = n.get('sleep')
@@ -92,6 +94,7 @@ def _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, 
             n['action']()
           # tick counter if needed
           if n.get('tick'):
+            print('current tick:' + str(counter['value']))
             counter['value'] += 1
           # sleep base on sleep factor
           min_sleep_time = 1/sleep_factor

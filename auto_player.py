@@ -1,7 +1,8 @@
 import cv2, numpy,time, os, random, threading
 import pyautogui
-import pyscreenshot as ImageGrab
+from PIL import ImageGrab
 from settings import *
+import imagehash
 
 
 #桌面模式下的鼠标操作延迟，程序已经设置随机延迟这里无需设置修改
@@ -17,6 +18,9 @@ except ImportError:
 else:
     def Beep(frequency,duration):
         winsound.Beep(frequency,duration)
+
+
+prev_screenshot_hash = -1
 
 
 #adb模式下设置连接测试
@@ -68,7 +72,8 @@ def screen_shot():
         # screen.save('./screen/screen.jpg')        
     # print('截图已完成 ', time.ctime())
     # screen = cv2.imread('./screen/screen.jpg')
-        image = pyautogui.screenshot()
+        # image = pyautogui.screenshot()
+        image = ImageGrab.grab()
         screen = cv2.cvtColor(numpy.array(image), cv2.COLOR_RGB2BGR)
         
     return screen
@@ -189,7 +194,7 @@ def find_touch(target, tap=True):
         return False
 
 #寻找并点击,找到返回目标名，未找到返回NONE
-def find_touch_any(target_list, tap=True):
+def find_touch_any(target_list, tap=True, tapTimes=1):
     screen = screen_shot()
     print('目标列表 ', target_list)
     re = None
@@ -202,9 +207,10 @@ def find_touch_any(target_list, tap=True):
             print('Y 已找到目标 ', target, '位置 ', pts[0])
             xx = pts[0]
             xx = random_offset(xx, w, h)
-            if tap:      
-                touch(xx)
-                random_delay()
+            if tap:
+                for llll in range(tapTimes):
+                    touch(xx)
+                    random_delay()
             re = target
             break
         else:

@@ -1,0 +1,15 @@
+[{
+    "name": ["juexing_award","juexing_start"],
+    "id": 2,
+    "sleep": 1,
+    "response": "开始",
+    "tick": false,
+    "next": [1]
+}, {
+    "name": ["juexing_award","juexing_start"],
+    "id": 1,
+    "sleep": 1,
+    "response": "领奖",
+    "tick": false,
+    "next": [2]
+}]
