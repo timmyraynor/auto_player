@@ -218,6 +218,29 @@ def find_touch_any(target_list, tap=True, tapTimes=1):
     return re
 
 
+#寻找并点击,找到返回目标名，未找到返回NONE
+def find_any_loc(target_list):
+    screen = screen_shot()
+    print('目标列表 ', target_list)
+    re = None
+    loc = None
+    for target in target_list:
+        wanted = imgs[target]
+        size = wanted[0].shape
+        h, w , ___ = size
+        pts = locate(screen, wanted)
+        if pts:
+            print('Y 已找到目标 ', target, '位置 ', pts[0])
+            xx = pts[0]
+            xx = random_offset(xx, w, h)
+            re = target
+            loc = xx
+            break
+        else:
+            print('N 未找到目标', target)
+    return re, loc
+
+
 def find_move_any(target_list, tap=True):
     screen = screen_shot()
     print('目标列表 ', target_list)

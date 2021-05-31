@@ -2393,6 +2393,8 @@
               </select>
               <label>sleep time:</label>
               <input type="text" df-db-sleep placeholder="sleep">
+              <label>tap times:</label>
+              <input type="text" df-db-taptimes placeholder="taptimes">
               <label>response:</label>
               <input type="text" df-db-response placeholder="response">
             </div>
@@ -2405,7 +2407,8 @@
               "seqid": nodeCounter,
               "response": '',
               "tick": 'false',
-              "sleep": 1
+              "sleep": 1,
+              "taptimes": 1
             }
           }, aws);
           break;
@@ -2432,7 +2435,7 @@
           outputObj['sleep'] = targetObject.sleep;
           outputObj['response'] = targetObject.response;
           outputObj['tick'] = targetObject.tick == "true";
-
+          outputObj['taptimes'] = targetObject.taptimes;
           outputObj['next'] = flow[k].outputs.output_1.connections.map(function(currentValue, index, arr){
             return parseInt(flow[currentValue.node].data.db.seqid);
           });
