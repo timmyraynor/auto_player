@@ -26,7 +26,7 @@ def _random_sleep(wmin=5,wmax=15):
 #        limits: how many times we should loop this through
 #                default is 3 [optional]
 #        nonehandler:  handler when nothing matched [optional]
-def perform_touch_loop(seq=[], limits=3, counter={'value': 0}, none_handler=None, full_seq=[]):
+def perform_touch_loop(seq=[], limits=3, counter={'value': 0}, none_handler=None, full_seq=[], exit_match=exit_match):
     seq = sorted(seq, key= lambda i: i['id'])
     action_pool = []
     t = [x['name'] for x in seq]
@@ -36,7 +36,7 @@ def perform_touch_loop(seq=[], limits=3, counter={'value': 0}, none_handler=None
     NoneCounterThreshold = 5
     if limits < 0:
       while True:
-        should_break, next_ops = _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, full_seq, action_pool)
+        should_break, next_ops = _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, full_seq, action_pool, exit_match)
         if should_break:
           break
         else:
@@ -45,7 +45,7 @@ def perform_touch_loop(seq=[], limits=3, counter={'value': 0}, none_handler=None
           NoneCounter = result[1]
     else:
       while counter['value'] < limits:
-        should_break, next_ops = _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, full_seq, action_pool)
+        should_break, next_ops = _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, full_seq, action_pool, exit_match)
         if should_break:
           break
         else:
@@ -66,7 +66,7 @@ def _process_no_action_matched(action_pool, none_counter, limit, next_ops):
     else:
       return next_ops, none_counter
 
-def _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, full_seq, action_pool):
+def _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, full_seq, action_pool, exit_match):
       if len(action_pool) == 0:
         target_list = constructed_touch_seq
         filtered_pool = full_seq
@@ -74,11 +74,15 @@ def _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, 
         t = [x['name'] for x in action_pool]
         target_list = [item for sublist in t for item in sublist]
         filtered_pool = action_pool
+        if exit_match:
+          target_list.append(exit_match)
       re, loc = player.find_any_loc(target_list)
       
       matched = False
       
       for n in filtered_pool:
+        if re == exit_match:
+          return True, full_seq
         if re in n['name']:
           print(n)
           tapTimes = n.get('taptimes', 1)
