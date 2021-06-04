@@ -138,7 +138,7 @@ def locate(screen, wanted, show=0):
             continue
         ex,ey = x,y
 
-        cv2.circle(screen, (x, y), 10, (0, 0, 255), 3)
+        # cv2.circle(screen, (x, y), 10, (0, 0, 255), 3)
             
         x,y = int(x)/2, int(y)/2
         loc_pos.append([x, y])
@@ -216,6 +216,28 @@ def find_touch_any(target_list, tap=True, tapTimes=1):
         else:
             print('N 未找到目标', target)
     return re
+
+
+def find_not_touch_any(target_list):
+    screen = screen_shot()
+    print('目标列表 ', target_list)
+    re = None
+    touch_points = None
+    for target in target_list:
+        wanted = imgs[target]
+        size = wanted[0].shape
+        h, w , ___ = size
+        pts = locate(screen, wanted)
+        if pts:
+            print('Y 已找到目标 ', target, '位置 ', pts[0])
+            xx = pts[0]
+            xx = random_offset(xx, w, h)
+            touch_points = xx
+            re = target
+            break
+        else:
+            print('N 未找到目标', target)
+    return re, touch_points
 
 
 def find_move_any(target_list, tap=True):

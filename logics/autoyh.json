@@ -1,12 +1,12 @@
 [{
-    "name": ["juexing_award", "yuhun_success","juexing_start"],
+    "name": ["yuhun_award","yuhun_success","yuhun_start"],
     "id": 2,
     "sleep": 1,
     "response": "开始",
     "tick": false,
     "next": [1]
 }, {
-    "name": ["juexing_award", "yuhun_success","juexing_start"],
+    "name": ["yuhun_award","yuhun_success","yuhun_start"],
     "id": 1,
     "sleep": 1,
     "response": "领奖",
