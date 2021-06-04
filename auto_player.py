@@ -218,11 +218,20 @@ def find_touch_any(target_list, tap=True, tapTimes=1):
     return re
 
 
+<<<<<<< HEAD
 def find_not_touch_any(target_list):
     screen = screen_shot()
     print('目标列表 ', target_list)
     re = None
     touch_points = None
+=======
+#寻找并点击,找到返回目标名，未找到返回NONE
+def find_any_loc(target_list):
+    screen = screen_shot()
+    print('目标列表 ', target_list)
+    re = None
+    loc = None
+>>>>>>> 353afbc0ae0ee21a48a82e4b5f3047b09e6ee6de
     for target in target_list:
         wanted = imgs[target]
         size = wanted[0].shape
@@ -232,12 +241,21 @@ def find_not_touch_any(target_list):
             print('Y 已找到目标 ', target, '位置 ', pts[0])
             xx = pts[0]
             xx = random_offset(xx, w, h)
+<<<<<<< HEAD
             touch_points = xx
             re = target
             break
         else:
             print('N 未找到目标', target)
     return re, touch_points
+=======
+            re = target
+            loc = xx
+            break
+        else:
+            print('N 未找到目标', target)
+    return re, loc
+>>>>>>> 353afbc0ae0ee21a48a82e4b5f3047b09e6ee6de
 
 
 def find_move_any(target_list, tap=True):
