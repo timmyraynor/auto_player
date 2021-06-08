@@ -1,0 +1,49 @@
+[{
+    "name": ["fy_start"],
+    "id": 5,
+    "sleep": 1,
+    "response": "点击组队",
+    "tick": false,
+    "taptimes": 1,
+    "next": [6]
+}, {
+    "name": ["fy_matching"],
+    "id": 6,
+    "sleep": 1,
+    "response": "匹配碎片",
+    "tick": false,
+    "taptimes": 1,
+    "next": [1]
+}, {
+    "name": ["fy_queue"],
+    "id": 1,
+    "sleep": 1,
+    "response": "排队中",
+    "tick": false,
+    "taptimes": 1,
+    "next": [1,2]
+}, {
+    "name": ["fy_ready"],
+    "id": 2,
+    "sleep": 1,
+    "response": "准备战斗",
+    "tick": false,
+    "taptimes": 1,
+    "next": [3]
+}, {
+    "name": ["fy_next"],
+    "id": 3,
+    "sleep": 1,
+    "response": "战斗成功",
+    "tick": false,
+    "taptimes": 1,
+    "next": [4]
+}, {
+    "name": ["fy_open_box"],
+    "id": 4,
+    "sleep": 1,
+    "response": "打开箱子",
+    "tick": false,
+    "taptimes": 1,
+    "next": [5]
+}]

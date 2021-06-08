@@ -83,6 +83,7 @@ def _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, 
           print(n)
           tapTimes = n.get('taptimes', 1)
           for xxxxxx in range(tapTimes):
+            print('tap')
             player.touch(loc)
             player.random_delay()
           matched = True

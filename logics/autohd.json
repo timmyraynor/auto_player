@@ -3,6 +3,7 @@
     "id": 2,
     "sleep": 1,
     "response": "开始",
+    "taptimes": 2,
     "tick": false,
     "next": [1]
 }, {
@@ -10,6 +11,7 @@
     "id": 1,
     "sleep": 1,
     "response": "领奖",
+    "taptimes": 2,
     "tick": false,
     "next": [2]
 }]

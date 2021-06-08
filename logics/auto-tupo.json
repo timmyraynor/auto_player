@@ -1,1 +1,51 @@
-[{"name":["jj_attack","tupo_attack2"],"id":1,"sleep":1,"response":"进攻选择","tick":false,"next":[2]},{"name":["fy_ready","jj_ready"],"id":2,"sleep":1,"response":"准备战斗...","tick":false,"next":[3,4]},{"name":["jj_fail_continue"],"id":3,"sleep":1,"response":"失败结算","tick":false,"next":[6,5]},{"name":["jj_success_continue","jj_success_continue2"],"id":4,"sleep":1,"response":"成功结算","tick":true,"next":[6,5]},{"name":["jj_tupo"],"id":5,"sleep":1,"response":"突破中","tick":false,"next":[1]},{"name":["jj_tupo_refresh","jj_tupo_refresh2"],"id":6,"sleep":1,"response":"刷完界面更新","tick":false,"next":[7]},{"name":["jj_tupo_confirm_refresh"],"id":7,"sleep":1,"response":"刷新确认","tick":false,"next":[5]}]
+[{
+  "name": ["jj_attack", "tupo_attack2"],
+  "id": 1,
+  "sleep": 1,
+  "response": "进攻选择",
+  "tick": false,
+  "next": [2]
+}, {
+  "name": ["fy_ready", "jj_ready"],
+  "id": 2,
+  "sleep": 1,
+  "taptimes": 3,
+  "response": "准备战斗...",
+  "tick": false,
+  "next": [3, 4]
+}, {
+  "name": ["jj_fail_continue"],
+  "id": 3,
+  "sleep": 1,
+  "response": "失败结算",
+  "tick": false,
+  "next": [6, 5]
+}, {
+  "name": ["jj_success_continue", "jj_success_continue2"],
+  "id": 4,
+  "sleep": 1,
+  "response": "成功结算",
+  "tick": true,
+  "next": [6, 5]
+}, {
+  "name": ["jj_tupo"],
+  "id": 5,
+  "sleep": 1,
+  "response": "突破中",
+  "tick": false,
+  "next": [1]
+}, {
+  "name": ["jj_tupo_refresh", "jj_tupo_refresh2"],
+  "id": 6,
+  "sleep": 1,
+  "response": "刷完界面更新",
+  "tick": false,
+  "next": [7]
+}, {
+  "name": ["jj_tupo_confirm_refresh"],
+  "id": 7,
+  "sleep": 1,
+  "response": "刷新确认",
+  "tick": false,
+  "next": [5]
+}]
