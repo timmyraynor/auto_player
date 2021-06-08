@@ -2381,21 +2381,26 @@
           <div>
             <div class="title-box"><i class="fab fa-telegram-plane"></i> 操作节点 </div>
             <div class="box">
-              <label>screenshots:</label>
+              <label>截图名称:</label>
               <input type="text" df-db-name
                 placeholder="screenshots names in comma seperate">
-              <label>seqid:</label>
+              <label>序号:</label>
               <input type="text" df-db-seqid placeholder="seqid">
-              <lable>tick:</label>
+              <lable>计数:</label>
               <select df-db-tick>
                 <option value="true">True</option>
                 <option value="false">False</option>
               </select>
-              <label>sleep time:</label>
+              <lable>自我循环:</label>
+                <select df-db-selfcycle>
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </select>
+              <label>休眠时间:</label>
               <input type="text" df-db-sleep placeholder="sleep">
-              <label>tap times:</label>
+              <label>点击次数:</label>
               <input type="text" df-db-taptimes placeholder="taptimes">
-              <label>response:</label>
+              <label>输出响应:</label>
               <input type="text" df-db-response placeholder="response">
             </div>
           </div>
@@ -2408,7 +2413,8 @@
               "response": '',
               "tick": 'false',
               "sleep": 1,
-              "taptimes": 1
+              "taptimes": 1,
+              "selfcycle": 'false'
             }
           }, aws);
           break;
@@ -2435,10 +2441,15 @@
           outputObj['sleep'] = targetObject.sleep;
           outputObj['response'] = targetObject.response;
           outputObj['tick'] = targetObject.tick == "true";
+          outputObj['selfcycle'] = targetObject.selfcycle == "true";
           outputObj['taptimes'] = targetObject.taptimes;
           outputObj['next'] = flow[k].outputs.output_1.connections.map(function(currentValue, index, arr){
             return parseInt(flow[currentValue.node].data.db.seqid);
           });
+          if(outputObj['selfcycle']) {
+            // process if this cycles to itself
+            outputObj['next'].push(parseInt(targetObject.seqid))
+          }
           output.push(outputObj);
         }
 
