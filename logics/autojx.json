@@ -1,5 +1,5 @@
 [{
-    "name": ["juexing_award", "yuhun_success","juexing_start"],
+    "name": ["juexing_start"],
     "id": 2,
     "sleep": 1,
     "response": "开始",
@@ -7,11 +7,11 @@
     "taptimes": 2,
     "next": [1]
 }, {
-    "name": ["juexing_award", "yuhun_success","juexing_start"],
+    "name": ["juexing_award"],
     "id": 1,
     "sleep": 1,
     "taptimes": 2,
     "response": "领奖",
-    "tick": false,
+    "tick": true,
     "next": [2]
 }]
