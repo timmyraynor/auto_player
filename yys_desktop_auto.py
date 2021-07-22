@@ -3,7 +3,7 @@ import auto_player as player
 import random
 from modules.friend import _friend_update
 from modules.parties import _parties_update
-from modules.enchantment import auto_play_enchantment
+# from modules.enchantment import auto_play_enchantment
 from modules.dynamic import auto_play_dynamic
 
 def get_pictures():   
@@ -141,7 +141,10 @@ def auto_play_fy(round=100):
             _random_sleep(wmax=5,wmin=1)
         print('已经刷了' + str(count) + '次。。。')
 
-    
+
+def auto_play_enchantment():
+    auto_play_dynamic(template='auto-tupo.json')
+
 
 def menu(debug=False):
 
