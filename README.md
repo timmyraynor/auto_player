@@ -43,7 +43,7 @@ Example app listening at http://localhost:3000
 需要安装如下内容:
 
 ````shell
-pip install opencv-python pyautogui pyscreenshot numpy imutils Pillow
+pip install opencv-python pyautogui pyscreenshot numpy imutils Pillow ImageHash
 ````
 
 安装完成后，可以通过python启动脚本。
