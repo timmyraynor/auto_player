@@ -6,6 +6,6 @@ mode = 1
 accuracy = 0.85 
 
 #匹配目标图片地址， 默认在./wanted文件夹
-wanted_path = './wanted' 
+wanted_path = './wanted/ios' 
 
 
