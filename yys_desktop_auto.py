@@ -146,6 +146,10 @@ def auto_play_enchantment():
     auto_play_dynamic(template='auto-tupo.json')
 
 
+def auto_play_28():
+    auto_play_dynamic(template='auto-28.json')
+
+
 def menu(debug=False):
 
     menu_list = [
@@ -157,7 +161,7 @@ def menu(debug=False):
     [daily_job, '自动日常'],
     [auto_play_dynamic, '动态读取配置'],
     # [auto_play_tower, '爬塔']，
-    [auto_play_dynamic, '测试']
+    [auto_play_28, '测试']
     ]
 
     start_time = time.time()

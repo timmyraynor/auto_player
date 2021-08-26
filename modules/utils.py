@@ -110,7 +110,7 @@ def _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, 
       
       for n in filtered_pool:
         if re in n['name']:
-          print(n)
+          print('tap times discovered[', n,'], meaning expecting screen changes')
           tapTimes = n.get('taptimes', 1)
           player.touch(loc)
           player.random_delay()
@@ -119,9 +119,9 @@ def _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, 
             org_hash = imagehash.average_hash(Image.frombytes("RGB", ss.size, ss.bgra, "raw", "BGRX"))
             print(org_hash)
             ss_cnt = 0
-            while ss_cnt < 10 and screen_hash_delta < 0.1 :
+            while ss_cnt < (tapTimes * 10) and screen_hash_delta < 0.1 :
               ss_cnt = ss_cnt + 1
-              nss_arr, nss = screen_shot()
+              _, nss = screen_shot()
               player.touch(loc)
               player.random_delay()
               new_hash = imagehash.average_hash(Image.frombytes("RGB", nss.size, nss.bgra, "raw", "BGRX"))

@@ -31,9 +31,10 @@
     "id": 3,
     "sleep": 1,
     "response": "开始探索",
+    "tapTimes": 2,
     "tick": false,
     "next": [
-      4
+      4, 3
     ]
   },
   {
@@ -64,7 +65,7 @@
   },
   {
     "name": [
-      "tansuo_award"
+      "tansuo_continue"
     ],
     "id": 7,
     "sleep": 1,
