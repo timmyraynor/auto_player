@@ -1,11 +1,11 @@
 import cv2, numpy,time, os, random, threading
 import pyautogui
-# from PIL import ImageGrab
+from PIL import ImageGrab
 import mss
 from settings import *
 import imagehash
 
-
+pyautogui.FAILSAFE = False
 #桌面模式下的鼠标操作延迟，程序已经设置随机延迟这里无需设置修改
 pyautogui.PAUSE = 0.01
 
@@ -146,6 +146,8 @@ def locate(screen, wanted, show=0):
     wanted, treshold, c_name = wanted
     result = cv2.matchTemplate(screen, wanted, cv2.TM_CCOEFF_NORMED)
     location = numpy.where(result >= treshold)
+    # minV, maxV, minL, maxL = cv2.minMaxLoc(result)
+    # location = maxL
 
     h,w = wanted.shape[:-1] 
 
@@ -157,8 +159,10 @@ def locate(screen, wanted, show=0):
         ex,ey = x,y
 
         # cv2.circle(screen, (x, y), 10, (0, 0, 255), 3)
-            
-        x,y = int(x)/2, int(y)/2
+        
+        print("data here ", x, ":", y)
+        x,y = int(x), int(y)
+        print("data here ", x, ":", y)
         loc_pos.append([x, y])
 
     if show:  #在图上显示寻找的结果，调试时开启

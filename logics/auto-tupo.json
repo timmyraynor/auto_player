@@ -21,7 +21,7 @@
   "tick": false,
   "next": [6, 5]
 }, {
-  "name": ["jj_success_continue", "jj_success_continue2"],
+  "name": ["success_cont"],
   "id": 4,
   "sleep": 1,
   "response": "成功结算",

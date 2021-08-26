@@ -6,6 +6,7 @@ from modules.parties import _parties_update
 # from modules.enchantment import auto_play_enchantment
 from modules.dynamic import auto_play_dynamic
 
+
 def get_pictures():   
     player.screen_shot()
 
@@ -146,8 +147,22 @@ def auto_play_enchantment():
     auto_play_dynamic(template='auto-tupo.json')
 
 
+def auto_play_jx():
+    auto_play_dynamic(template='autojx.json')
+
+def auto_play_jx_old():
+    auto_play_dynamic(template='autojxbak.json')
+
 def auto_play_28():
     auto_play_dynamic(template='auto-28.json')
+
+
+
+def auto_fragement():
+    auto_play_dynamic(template="autojx.json", round=3)
+    auto_play_dynamic(template="autojxttp.json", round=1)
+    auto_play_dynamic(template="auto-tupo.json", round=1)
+    auto_play_dynamic(template="auto-tupjx.json", round=1)
 
 
 def menu(debug=False):
@@ -160,8 +175,8 @@ def menu(debug=False):
     [auto_play_enchantment, '自动结界突破'],
     [daily_job, '自动日常'],
     [auto_play_dynamic, '动态读取配置'],
-    # [auto_play_tower, '爬塔']，
-    [auto_play_28, '测试']
+    [auto_play_jx, '自动觉醒'],
+    [auto_play_jx_old, '测试']
     ]
 
     start_time = time.time()

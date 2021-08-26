@@ -1,0 +1,18 @@
+[{
+    "name": ["success_cont", "juexing_start"],
+    "id": 2,
+    "sleep": 1,
+    "response": "开始",
+    "tick": false,
+    "taptimes": 2,
+    "next": [1]
+},
+{
+    "name": ["success_cont", "juexing_start"],
+    "id": 1,
+    "sleep": 1,
+    "taptimes": 2,
+    "response": "邀请",
+    "tick": false,
+    "next": [2]
+}]

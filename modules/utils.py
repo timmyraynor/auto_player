@@ -75,6 +75,7 @@ def perform_touch_loop(seq=[], limits=3, counter={'value': 0}, none_handler=None
           NoneCounter = result[1]
     else:
       while counter['value'] < limits:
+        print('Current max limit is:', limits)
         should_break, next_ops = _act_with_clicks(constructed_touch_seq, seq, counter, none_handler, limits, full_seq, action_pool)
         if should_break:
           break
