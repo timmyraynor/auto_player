@@ -74,15 +74,27 @@ def screen_shot():
     # print('截图已完成 ', time.ctime())
     # screen = cv2.imread('./screen/screen.jpg')
         # image = pyautogui.screenshot()
-        #image = ImageGrab.grab()
-        #screen = cv2.cvtColor(numpy.array(image), cv2.COLOR_RGB2BGR)
-        screen = None
-        with mss.mss() as mss_instance:
-            monitor1=mss_instance.monitors[0]
-            screenshot_mss = mss_instance.grab(monitor1)
-            screen = cv2.cvtColor(numpy.array(screenshot_mss), cv2.COLOR_BGRA2BGR)
-        
+        # image = ImageGrab.grab()
+        # screen = cv2.cvtColor(numpy.array(image), cv2.COLOR_RGB2BGR)
+        # im = np.array(mss.mss().grab(monitor))
+        # screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        with mss.mss() as mss_instance:  # Create a new mss.mss instance
+            monitor_1 = mss_instance.monitors[1]  # Identify the display to capture
+            screenshot = mss_instance.grab(monitor_1)  # Take the screenshot
+            im = numpy.array(screenshot)
+            screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
     return screen
+
+
+#截屏
+def screen_shot_with_raw():
+    with mss.mss() as mss_instance:  # Create a new mss.mss instance
+        monitor_1 = mss_instance.monitors[1]  # Identify the display to capture
+        screenshot = mss_instance.grab(monitor_1)  # Take the screenshot
+        im = numpy.array(screenshot)
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+    return screen, screenshot
+
 
 def moveToOnly(pos):
     x, y = pos
@@ -204,8 +216,11 @@ def find_touch(target, tap=True):
         return False
 
 #寻找并点击,找到返回目标名，未找到返回NONE
-def find_touch_any(target_list, tap=True, tapTimes=1):
+def find_touch_any(target_list, tap=True, tapTimes=1, expectChange=False):
     screen = screen_shot()
+    screenHash = 0
+    if expectChange:
+        screenHash = imagehash.average_hash(screen)
     print('目标列表 ', target_list)
     re = None
     for target in target_list:
@@ -221,6 +236,15 @@ def find_touch_any(target_list, tap=True, tapTimes=1):
                 for llll in range(tapTimes):
                     touch(xx)
                     random_delay()
+
+                    if expectChange:
+                        dist = 0
+                        while dist < 10:
+                            nxtScreenHash = imagehash.average_hash(screen_shot())
+                            dist = hamming(screenHash, nxtScreenHash)
+                            touch(xx)
+                            random_delay()
+
             re = target
             break
         else:
@@ -230,7 +254,7 @@ def find_touch_any(target_list, tap=True, tapTimes=1):
 
 #寻找并点击,找到返回目标名，未找到返回NONE
 def find_any_loc(target_list):
-    screen = screen_shot()
+    screen, ss = screen_shot_with_raw()
     print('目标列表 ', target_list)
     re = None
     loc = None
@@ -248,7 +272,7 @@ def find_any_loc(target_list):
             break
         else:
             print('N 未找到目标', target)
-    return re, loc
+    return re, loc, ss
 
 
 def find_move_any(target_list, tap=True):

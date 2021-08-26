@@ -1,1 +1,114 @@
-[{"name":["tansuo_start"],"id":1,"sleep":1,"response":"开始探索","tick":false,"next":[2]},{"name":["tansuo_loc_anchor2","tansuo_center_mark"],"id":2,"sleep":1,"response":"移动到中间","tick":false,"next":[4]},{"name":["tansuo_normal_attack"],"id":4,"sleep":1,"response":"开始攻击","tick":false,"next":[5]},{"name":["tansuo_award"],"id":5,"sleep":1,"response":"完成领奖","tick":false,"next":[3,4]},{"name":["tansuo_boss_attack"],"id":3,"sleep":1,"response":"开始打boss","tick":false,"next":[7]},{"name":["tansuo_award"],"id":7,"sleep":1,"response":"boss攻击结束","tick":false,"next":[1]}]
+[
+  {
+    "name": [
+      "tansuo_finished_award"
+    ],
+    "id": 1,
+    "sleep": 1,
+    "response": "boss攻击结束",
+    "tick": false,
+    "next": [
+      2,
+      3
+    ]
+  },
+  {
+    "name": [
+      "tansuo_finished_award_click"
+    ],
+    "id": 2,
+    "sleep": 1,
+    "response": "确定奖励",
+    "tick": false,
+    "next": [
+      3
+    ]
+  },
+  {
+    "name": [
+      "tansuo_start", "tansuo_title"
+    ],
+    "id": 3,
+    "sleep": 1,
+    "response": "开始探索",
+    "tick": false,
+    "next": [
+      4
+    ]
+  },
+  {
+    "name": [
+      "tansuo_loc_anchor2",
+      "tansuo_center_mark"
+    ],
+    "id": 4,
+    "sleep": 4,
+    "minsleep": 4,
+    "response": "移动到中间",
+    "tick": false,
+    "next": [
+      6
+    ]
+  },
+  {
+    "name": [
+      "tansuo_normal_attack"
+    ],
+    "id": 6,
+    "sleep": 1,
+    "response": "开始攻击",
+    "tick": false,
+    "next": [
+      7
+    ]
+  },
+  {
+    "name": [
+      "tansuo_award"
+    ],
+    "id": 7,
+    "sleep": 1,
+    "response": "完成领奖",
+    "tick": false,
+    "next": [
+      5,
+      6
+    ]
+  },
+  {
+    "name": [
+      "tansuo_boss_attack"
+    ],
+    "id": 5,
+    "sleep": 1,
+    "response": "开始打boss",
+    "tick": false,
+    "next": [
+      9
+    ]
+  },
+  {
+    "name": [
+      "tansuo_award"
+    ],
+    "id": 9,
+    "sleep": 1,
+    "response": "boss攻击结束",
+    "tick": false,
+    "next": [
+      1
+    ]
+  },
+  {
+    "name": [
+      "tansuo_28"
+    ],
+    "id": 10,
+    "sleep": 1,
+    "response": "boss攻击结束",
+    "tick": false,
+    "next": [
+      3
+    ]
+  }
+]

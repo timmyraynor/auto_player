@@ -1,6 +1,4 @@
-import time, os
 import auto_player as player
-import random
 from modules.utils import perform_touch_loop, _random_sleep
 import json
 
