@@ -1,17 +1,118 @@
-[{
-    "name": ["juexing_start"],
-    "id": 2,
-    "sleep": 1,
-    "response": "开始",
-    "tick": false,
-    "taptimes": 2,
-    "next": [1]
-}, {
-    "name": ["juexing_award"],
-    "id": 1,
-    "sleep": 1,
-    "taptimes": 2,
-    "response": "领奖",
-    "tick": true,
-    "next": [2]
-}]
+[
+    {
+        "name": [
+            "add_user"
+        ],
+        "id": 1,
+        "sleep": 1,
+        "response": "加队友",
+        "tick": false,
+        "selfcycle": false,
+        "taptimes": 1,
+        "next": [
+            2
+        ]
+    },
+    {
+        "name": [
+            "jx_add_tim"
+        ],
+        "id": 2,
+        "sleep": 1,
+        "response": "选队友",
+        "tick": false,
+        "selfcycle": false,
+        "taptimes": 1,
+        "next": [
+            3
+        ]
+    },
+    {
+        "name": [
+            "invite_friend","jx_send_invite"
+        ],
+        "id": 3,
+        "sleep": 1,
+        "response": "发出邀请",
+        "tick": false,
+        "selfcycle": false,
+        "taptimes": 1,
+        "next": [
+            4
+        ]
+    },
+    {
+        "name": [
+            "accept_gear_invite", "accept_invite"
+        ],
+        "id": 4,
+        "sleep": 1,
+        "response": "接受邀请",
+        "tick": false,
+        "selfcycle": false,
+        "taptimes": 1,
+        "next": [
+            7
+        ]
+    },
+    {
+        "name": [
+            "accept_gear_invite", "accept_invite",
+            "invite_friend",
+            "juexing_success",
+            "juexing_award",
+            "juexing_start",
+            "confirm",
+            "jx_ready_click"
+        ],
+        "id": 6,
+        "sleep": 1,
+        "response": "成功领奖",
+        "tick": false,
+        "selfcycle": false,
+        "taptimes": 1,
+        "next": [
+            7
+        ]
+    },
+    {
+        "name": [
+            "accept_gear_invite", "accept_invite",
+            "invite_friend",
+            "juexing_success",
+            "juexing_award",
+            "juexing_start",
+            "confirm",
+            "jx_ready_click"
+        ],
+        "id": 7,
+        "sleep": 1,
+        "response": "开始",
+        "tick": false,
+        "selfcycle": false,
+        "taptimes": 1,
+        "next": [
+            6
+        ]
+    },
+    {
+        "name": [
+            "accept_gear_invite",
+            "accept_invite",
+            "jx_ready_click",
+            "add_user",
+            "jx_add_tim",
+            "confirm",
+            "juexing_start"
+        ],
+        "id": 5,
+        "sleep": 1,
+        "response": "额外邀请",
+        "tick": false,
+        "selfcycle": true,
+        "taptimes": 1,
+        "next": [
+            5
+        ]
+    }
+]
